@@ -22,7 +22,7 @@ resource "azurerm_network_security_group" "myterraformsg" {
     location = "westeurope"
     resource_group_name = azurerm_resource_group.terraformgroup.name
 
-    security_rule = {
+    security_rule {
         name = "SSH"
         priority = 1002
         direction = "Inbound"
@@ -70,7 +70,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
     computer_name = "vmdemo"
     admin_username = "vmdemo"
     admin_password = random_password.password.result
-    size = "Standard_DS1_v2"
+    size = "Standard_B1ms"
 
     os_disk {
       name = "myOsDisk"
@@ -80,7 +80,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
     source_image_reference {
       publisher = "Canonical"
       offer = "UbuntuServer"
-      sku = "19.04"
+      sku = "19.10"
       version = "latest"
     }
   
