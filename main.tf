@@ -4,6 +4,16 @@ provider "azurerm" {
   subscription_id = "ae5c06a5-35d9-4549-a05c-e9cf1c7a36e3"
 }
 
+# data "azurerm_resource_group" "rg"{
+#   name = "my-resource-group"
+# }
+
+module "azure_storage" {
+  source = "./modules/azure-storage-account"
+  storage_account_name = "mystorageaccount12343"
+  resource_group_name = azurerm_resource_group.state_rg.name 
+}
+
 # Grupa zasobów dla konta storage
 resource "azurerm_resource_group" "state_rg" {
   name     = "terraform-state-rg"
@@ -48,4 +58,7 @@ resource "azurerm_resource_group" "prod_rg" {
     location = "West Europe"
 }
 
-
+output "storage_account_endpoint" {
+    description = "value"
+    value = module.azure_storage.storage_account_endpoint
+}
