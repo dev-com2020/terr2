@@ -14,6 +14,10 @@ module "azure_storage" {
   resource_group_name = azurerm_resource_group.state_rg.name 
 }
 
+module "password_module" {
+  source = "./modules/password"
+}
+
 # Grupa zasobów dla konta storage
 resource "azurerm_resource_group" "state_rg" {
   name     = "terraform-state-rg"
