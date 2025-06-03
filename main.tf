@@ -1,6 +1,7 @@
 # Konfiguracja dostawcy Azure
 provider "azurerm" {
   features {}
+  subscription_id = "ae5c06a5-35d9-4549-a05c-e9cf1c7a36e3"
 }
 
 # Grupa zasobów dla konta storage
@@ -38,17 +39,15 @@ resource "random_string" "storage_suffix" {
 }
 
 # Konfiguracja backend
-terraform {
-  backend "azurerm" {
-    resource_group_name = "terraform-state-rg"
-    storage_account_name = "tfstate${random_string.storage_suffix.result}"
-    container_name = "tfstate"
-    key = "prod.terraform.tfstate"
-  }
-}
+# terraform {
+#   backend "azurerm" {
+
+#   }
+# }
 # testowy zasób
 resource "azurerm_resource_group" "prod_rg" {
     name = "prod-ennvironment-rg"
     location = "West Europe"
 }
+
 
