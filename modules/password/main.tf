@@ -80,7 +80,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
     source_image_reference {
       publisher = "Canonical"
       offer = "UbuntuServer"
-      sku = "19.10"
+      sku = "19_10-daily-gen2"
       version = "latest"
     }
   
