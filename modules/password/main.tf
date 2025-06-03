@@ -98,6 +98,5 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
     }
   lifecycle {
     ignore_changes = [ admin_password ]
-
   }
 }
