@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "terraformgroup" {
-    name = "myResourceGroup"
+    name = "myResourceGroupTK"
     location = "westeurope"  
 
     lifecycle {
@@ -58,7 +58,7 @@ resource "azurerm_public_ip" "myterraformpublic" {
 
 resource "azurerm_network_interface" "myterraformic" {
     name = "myNIC"
-    location = "westereurope"
+    location = "westeurope"
     resource_group_name = azurerm_resource_group.terraformgroup.name
   ip_configuration {
     name = "myNICConf"

@@ -18,9 +18,17 @@ module "password_module" {
   source = "./modules/password"
 }
 
+module "webapp" {
+  source              = "git::https://BookLabs@dev.azure.com/BookLabs/Terraform-modules/_git/terraform-azurerm-webapp?ref=v1.0.0"
+  service_plan_name   = "spmyapp2"
+  app_name            = "myappdemobook2"
+  location            = azurerm_resource_group.rg-app.location
+  resource_group_name = azurerm_resource_group.rg-app.name
+}
+
 # Grupa zasobów dla konta storage
 resource "azurerm_resource_group" "state_rg" {
-  name     = "terraform-state-rg"
+  name     = "terraform-state-rgtk12"
   location = "West Europe"
 }
 
@@ -53,9 +61,14 @@ resource "random_string" "storage_suffix" {
 }
 
 # Konfiguracja backend
-terraform {
-  backend "azurerm" {}
-}
+# terraform {
+#   backend "azurerm" {
+#     resource_group_name   = "terraform-state-rg"
+#     storage_account_name  = "tfstate6k861l4s"
+#     container_name        = "tfstate"
+#     key                   = "prod.terraform.tfstate"
+#   }
+# }
 # testowy zasób
 resource "azurerm_resource_group" "prod_rg" {
     name = "prod-ennvironment-rg"
