@@ -39,11 +39,9 @@ resource "random_string" "storage_suffix" {
 }
 
 # Konfiguracja backend
-# terraform {
-#   backend "azurerm" {
-
-#   }
-# }
+terraform {
+  backend "azurerm" {}
+}
 # testowy zasób
 resource "azurerm_resource_group" "prod_rg" {
     name = "prod-ennvironment-rg"
