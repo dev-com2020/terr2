@@ -1,12 +1,21 @@
 resource "azurerm_resource_group" "terraformgroup" {
     name = "myResourceGroup"
     location = "westeurope"  
+
+    lifecycle {
+      prevent_destroy = true
+    }
 }
 resource "azurerm_virtual_network" "myterraformnetwork" {
   name = "myVnet-demo"
   address_space = [ "10.0.0.0/16" ]
   location = "westeurope"
   resource_group_name = azurerm_resource_group.terraformgroup.name
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
 }
 
 resource "azurerm_subnet" "myterraformsubnet" {
@@ -40,6 +49,10 @@ resource "azurerm_public_ip" "myterraformpublic" {
     resource_group_name = azurerm_resource_group.terraformgroup.name
     location = "westeurope"
     allocation_method = "Dynamic"
+
+    lifecycle {
+      ignore_changes = [ tags ]
+    }
 }
 
 
@@ -83,5 +96,8 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
       sku = "19_10-daily-gen2"
       version = "latest"
     }
-  
+  lifecycle {
+    ignore_changes = [ admin_password ]
+
+  }
 }
